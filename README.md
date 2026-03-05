@@ -9,7 +9,7 @@
 | Atiapa Samuel | 22087435 | Domain Expert Liaison |
 | Adom Bempong Franklin | 22020618 | Knowledge Engineer |
 | Sangeerth Shyjith |  22033894   | Prolog Developer |
-| Nana Kwasi | ID Number | Backend Developer |
+| Nana Kwasi Agyiri | 22136496 | Backend Developer |
 | Elvis Boateng |  22017502  | Frontend Developer |
 | ⁠Zephaniah Winsakiya Ayuah| 22019587 | Integration & Testing Developer |
 
