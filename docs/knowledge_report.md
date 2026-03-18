@@ -1,140 +1,145 @@
-1. INTRODUCTION
-Agriculture is a key sector in food production, and crop diseases significantly reduce both yield and quality. Farmers often find it difficult to diagnose diseases accurately due to similar symptoms across different conditions. To solve this problem, an expert system can assist by providing accurate diagnosis and recommendations.
-This report presents the development of the knowledge base for a Crop Disease Expert System. The knowledge base is responsible for storing structured information about diseases and enabling intelligent decision-making.
 
-2. OBJECTIVE OF THE KNOWLEDGE BASE
-•	Store crop disease knowledge in a structured format
-•	Enable accurate diagnosis based on symptoms
-•	Provide clear disease descriptions
-•	Recommend effective treatments
 
-3. KNOWLEDGE REPRESENTATION
-The system uses Prolog for knowledge representation.
-Each disease is represented as:
+
+
+1. Introduction
+This report presents the design and implementation of a Crop Disease Prediction Expert System developed to assist farmers in diagnosing diseases affecting maize and tomato crops.
+The system uses a knowledge-based approach to identify diseases based on observable symptoms and provides recommendations for treatment. It combines knowledge representation techniques with practical implementation using Prolog and Python.
+
+2. Crops Covered
+The expert system focuses on the following crops:
+•	Maize
+•	Tomato
+These crops were selected due to their economic importance and the availability of well-documented disease information.
+
+3. Identified Crop Diseases
+A wide range of diseases affecting maize and tomato were identified and included in the system. Each disease is associated with specific symptoms, descriptions, and treatment recommendations.
+
+4. Disease Symptoms Knowledge Base
+Each disease in the system is linked to a set of observable symptoms. These symptoms are used to guide the diagnostic process.
+The knowledge base also includes:
+•	Disease descriptions
+•	Recommended treatments
+
+5. Knowledge Representation
+The system uses a knowledge-based representation implemented in Prolog.
+Each disease is stored using the structure:
 disease_info(Crop, Disease, Symptoms, Description, Recommendation)
+This allows the system to store both diagnostic and advisory information in a structured format.
 
-4. DIAGNOSIS LOGIC
-The system uses a rule-based approach:
-•	Each disease is defined by three symptoms
-•	Diagnosis occurs only when all symptoms match
-•	This ensures high accuracy and reduces ambiguity
+6. System Implementation
+The system was implemented using:
+•	Prolog → for the knowledge base
+•	Python (Tkinter) → for the graphical user interface
+Prolog stores all disease-related knowledge, while Python handles user interaction and communicates with the Prolog system to retrieve relevant information.
 
-5. KNOWLEDGE BASE CONTENT
-5.1 Maize Diseases
-(15 diseases covered)
-5.2 Tomato Diseases
-(15 diseases covered)
+7. System Architecture
+The system consists of three main components:
+i. User Interface (Python - Tkinter)
+•	Allows users to interact with the system
+•	Displays symptoms and results
+ii. Knowledge Base (Prolog)
+•	Stores diseases, symptoms, descriptions, and recommendations
+iii. Interaction Layer
+•	Python queries Prolog to retrieve disease data
+System Flow:
+User  Python Interface  Prolog Knowledge Base  Python User
 
-6. KNOWLEDGE ACQUISITION
-Knowledge was obtained from:
-•	Agricultural guides
-•	Crop disease manuals
-•	Standard farming practices
 
-7. QUERY MECHANISM
-•	get_all_diseases(Crop, Diseases)
-•	get_disease_info(Crop, Disease, Symptoms, Description, Recommendation)
+8. Project Structure
+The project is organized into the following modules:
+•	docs/
+o	Contains documentation such as the knowledge report
+•	interface/
+o	Contains the Python application (app.py)
+o	Handles user interaction and display
+•	knowledge_base/
+o	Contains the Prolog file (expert_system.pl)
+o	Stores all expert knowledge
+•	README.md
+o	Provides project overview and usage instructions
 
-8. CONCLUSION
-The knowledge base provides a solid foundation for diagnosing crop diseases using structured rules. It is accurate, scalable, and practical for real-world use.
+9. Code Implementation
+Prolog Knowledge Base Example
+disease_info(maize, 'Maize Rust',
+    ['Reddish-brown spots on leaves', 'Yellow patches on leaves', 'Leaves drying early'],
+    'A fungal disease causing reddish-brown pustules on leaves.',
+    'Apply fungicides such as mancozeb.').
+Query Predicate Example
+get_all_diseases(Crop, Diseases) :-
+    findall(D, disease_info(Crop, D, _, _, _), Diseases).
+Python Integration Example
+self.kb = KnowledgeBase()
+Python uses this connection to retrieve disease information from Prolog.
 
-9. RULE BASE REPRESENTATION (IF–THEN RULES)
-The system can also be expressed using IF–THEN rules for clarity.
+10. System Interaction
+The system operates as follows:
+1.	The user selects a crop (maize or tomato)
+2.	The system retrieves all diseases associated with the crop
+3.	Symptoms for each disease are displayed
+4.	The user confirms whether the symptoms match (YES/NO)
+5.	The system records confirmed diseases
+6.	Final results are displayed with:
+o	Disease name
+o	Symptoms
+o	Description
+o	Recommendation
 
-**MAIZE DISEASE RULES**
+11. Testing and Results
+The system was tested using different symptom combinations.
+Test Case 1
+•	Crop: Maize
+•	Symptoms:
+o	Reddish-brown spots
+o	Yellow patches
+o	Early leaf drying
+Result:
+•	Disease Identified: Maize Rust
+•	Recommendation: Apply fungicide and use resistant varieties
 
-IF Crop = Maize AND Reddish-brown spots on leaves AND Yellow patches on leaves AND Leaves drying early
-THEN Disease = Maize Rust
 
-IF Crop = Maize AND Yellow streaks on leaves AND Stunted plant growth AND Pale green leaves
-THEN Disease = Maize Streak Virus
+Test Case 2
+•	Crop: Tomato
+•	Symptoms:
+o	Brown spots with rings
+o	Yellow lower leaves
+o	Leaf drop
+Result:
+•	Disease Identified: Early Blight
 
-IF Crop = Maize AND Rectangular gray lesions on leaves AND Brown leaf edges AND Leaves drying prematurely
-THEN Disease = Gray Leaf Spot
+Test Case 3
+•	No matching symptoms
+Result:
+•	System indicates no disease detected
 
-IF Crop = Maize AND Swollen galls on ears or leaves AND Black powder inside galls AND Distorted plant tissues
-THEN Disease = Common Smut
+12. Challenges Faced
+The following challenges were encountered:
+•	Similarity of Symptoms
+Some diseases share similar symptoms, making diagnosis difficult
+•	Integration Complexity
+Connecting Python with Prolog required careful handling
+•	User Input Accuracy
+Users may not correctly identify symptoms
 
-IF Crop = Maize AND Yellow leaves AND White fungal growth under leaves AND Stunted plants
-THEN Disease = Downy Mildew
+13. Final Conclusion
+The Crop Disease Prediction Expert System successfully demonstrates the application of artificial intelligence techniques in agriculture.
+By combining a Prolog-based knowledge system with a Python user interface, the system is able to:
+•	Diagnose crop diseases
+•	Provide useful recommendations
+•	Assist farmers in decision-making
+This project highlights the effectiveness of knowledge-based systems in solving real-world problems.
 
-IF Crop = Maize AND White mold on maize ears AND Pink fungal growth on ears AND Rotting kernels
-THEN Disease = Fusarium Ear Rot
 
-IF Crop = Maize AND White mold on ear AND Brown dry ears AND Kernels sticking together
-THEN Disease = Diplodia Ear Rot
 
-IF Crop = Maize AND Small brown spots on leaves AND Spots merging together AND Yellow leaves
-THEN Disease = Anthracnose Leaf Blight
 
-IF Crop = Maize AND Long cigar-shaped lesions AND Gray leaf patches AND Leaves turning brown
-THEN Disease = Northern Corn Leaf Blight
 
-IF Crop = Maize AND Small tan leaf spots AND Spots spreading on leaves AND Early leaf drying
-THEN Disease = Southern Corn Leaf Blight
 
-IF Crop = Maize AND Narrow yellow streaks on leaves AND Streaks turning brown AND Dry leaf tissue
-THEN Disease = Bacterial Leaf Streak
 
-IF Crop = Maize AND Mosaic light and dark green leaf pattern AND Narrow leaves AND Stunted plants
-THEN Disease = Maize Dwarf Mosaic Virus
 
-IF Crop = Maize AND Black powder inside the stem AND Weak and easily broken stalks AND Plant wilting
-THEN Disease = Charcoal Rot
 
-IF Crop = Maize AND Seedlings failing to emerge AND Brown stem lesions on seedlings AND Seedling collapse
-THEN Disease = Seedling Blight
 
-IF Crop = Maize AND Rotting roots AND Wilting plants AND Poor plant growth
-THEN Disease = Root Rot
 
-**TOMATO DISEASE RULES**
-IF Crop = Tomato AND Brown leaf spots with concentric rings AND Yellow lower leaves AND Leaf drop
-THEN Disease = Early Blight
 
-IF Crop = Tomato AND Dark water-soaked spots on leaves AND White mold under leaves AND Rapid plant decay
-THEN Disease = Late Blight
 
-IF Crop = Tomato AND Leaves curling upward AND Yellow leaf edges AND Stunted growth
-THEN Disease = Tomato Leaf Curl Virus
-
-IF Crop = Tomato AND Sudden plant wilting AND Brown stem discoloration AND Plant death
-THEN Disease = Bacterial Wilt
-
-IF Crop = Tomato AND Yellow lower leaves AND Wilting in hot weather AND Brown streaks inside the stem
-THEN Disease = Fusarium Wilt
-
-IF Crop = Tomato AND Yellow V-shaped spots on leaves AND Lower leaves wilting AND Slow plant decline
-THEN Disease = Verticillium Wilt
-
-IF Crop = Tomato AND Small circular spots on leaves AND Dark borders around spots AND Yellow leaf areas
-THEN Disease = Septoria Leaf Spot
-
-IF Crop = Tomato AND Mosaic light and dark green leaf pattern AND Distorted leaves AND Reduced fruit yield
-THEN Disease = Tomato Mosaic Virus
-
-IF Crop = Tomato AND White powder on leaves AND Yellow leaves AND Leaf drop
-THEN Disease = Powdery Mildew
-
-IF Crop = Tomato AND Small dark spots on leaves AND Yellow halos around leaf spots AND Raised spots on fruit
-THEN Disease = Bacterial Spot
-
-IF Crop = Tomato AND Sunken lesions on fruit AND Fruit rotting during ripening AND Circular spots on fruit
-THEN Disease = Anthracnose
-
-IF Crop = Tomato AND Bronze or brown leaf color AND Ring spots on fruit AND Stunted plants
-THEN Disease = Tomato Spotted Wilt Virus
-
-IF Crop = Tomato AND Swollen knots on roots AND Yellow leaves AND Weak plant growth
-THEN Disease = Root Knot Nematode
-
-IF Crop = Tomato AND Dark spot at the bottom of fruit AND Rotting fruit tissue AND Premature fruit decay
-THEN Disease = Blossom End Rot
-
-IF Crop = Tomato AND Seedlings collapsing at soil level AND Soft stem base on seedlings AND Poor germination
-THEN Disease = Damping Off
-
-**FINAL NOTE**
-The IF–THEN rules clearly show how the system makes decisions. When all conditions in a rule are satisfied, the system concludes the corresponding disease, ensuring accurate and reliable diagnosis.
 
 
